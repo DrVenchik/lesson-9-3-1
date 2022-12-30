@@ -21,7 +21,7 @@ function Portfolio() {
       return condition
     }    
   }
-// получение данных
+  // получение данных
   const imgs = [{
     img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/mon.jpg",
     category: "Business Cards"
@@ -76,28 +76,19 @@ function Portfolio() {
   }, {
     img: "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/events-state/filter/img/place200x290_2.png",
     category: "Flayers"
-  },]
+  }]
 
-// фильтр полученных данных
-  let imgsFilter = [];
-  for(let i = 0; i < imgs.length; i++) {
-    if(condition === "All") {
-      imgsFilter.push(imgs[i])
-    } else if (condition === imgs[i].category) {
-      imgsFilter.push(imgs[i])
+  // фильтр полученных данных
+  const [arrImg, setArrImg] = React.useState(imgs); 
+ 
+  setArrImg(arrImg.map((element) => {
+    if (condition === arr[0]) {
+      return element
+    } else if (condition === element.category) {
+      return element
     }
-  }
-
-
-  // imgs.map((element) => {
-  //   if(condition === "All") {
-  //     return element
-  //   } else if (condition === element.category) {
-  //     return element
-  //   }
-    
-  // })
-  console.log(imgsFilter)
+  }))
+ 
 
   return (
     <div className="wrapper">
@@ -107,7 +98,7 @@ function Portfolio() {
         onSelectFilter={buttonActive}
       />
 
-      <ProjectList projects={imgs}/>  
+      <ProjectList projects={arrImg} />  
     </div>
   )
 }
