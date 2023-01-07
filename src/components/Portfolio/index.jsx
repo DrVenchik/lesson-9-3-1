@@ -6,7 +6,8 @@ import ProjectList from "../ProjectList";
 
 function Portfolio() {
   const arr = ["All", "Websites", "Flayers", "Business Cards"];
-  let condition = arr[0];
+  let [condition, setCondition] = React.useState(arr[0]);
+  
 
   function buttonActive(event){
     if(condition === event.target.id) {
@@ -17,7 +18,7 @@ function Portfolio() {
       });       
       event.target.classList.add("active");
       condition = event.target.id;
-      console.log(condition)
+      setCondition(condition)
       return condition
     }    
   }
@@ -79,15 +80,24 @@ function Portfolio() {
   }]
 
   // фильтр полученных данных
-  const [arrImg, setArrImg] = React.useState(imgs); 
+  const [arrImg, setArrImg] = React.useState(imgs);
  
-  setArrImg(arrImg.map((element) => {
-    if (condition === arr[0]) {
-      return element
-    } else if (condition === element.category) {
-      return element
-    }
-  }))
+  function filterItems(imgs) {
+    let newArr = imgs.filter((element) => {
+      if (condition === arr[0]) {
+        return true
+      } else if (condition === element.category) {
+        return true
+      } else {return false}
+    })
+    return newArr
+  }
+
+  React.useEffect(() => {
+    setArrImg(filterItems(imgs))
+  }, [condition])
+ 
+  
  
 
   return (

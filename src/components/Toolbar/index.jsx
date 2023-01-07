@@ -3,9 +3,13 @@ import React from "react";
 
 function Toolbar({ filters, selected, onSelectFilter }) {
   const sectionRef = React.useRef();
+
+  React.useEffect(() => {
+    document.getElementById(filters[0]).classList.add("active");
+  }, [])
   
   React.useEffect(() => {
-    sectionRef.current.childNodes[0].classList.add("active");
+    
 
     document.querySelectorAll(".btn").forEach((element) => {
       element.addEventListener('click', onSelectFilter)
